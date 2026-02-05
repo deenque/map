@@ -19,7 +19,7 @@
     }
     h1 {
       text-align: center;
-      color: #EDD293;
+      color: #ffd197;
       margin: 16px 0 12px;
       font-size: clamp(1.8rem, 5vw, 2.4rem);
       font-weight: 600;
@@ -91,7 +91,7 @@
       font-size: 1.1em;
     }
 
-    /* Индикатор скролла — ТОЛЬКО НА МОБИЛЬНЫХ, без фона/рамки */
+   /* Индикатор скролла — ТОЛЬКО НА МОБИЛЬНЫХ */
     .scroll-indicator {
       position: absolute;
       top: 1px;
@@ -107,7 +107,6 @@
       z-index: 10;
       pointer-events: none;
       animation: fadeInOut 8s infinite;
-      display: flex;
       align-items: center;
       gap: 10px;
     }
@@ -120,30 +119,7 @@
       0%, 100% { opacity: 0.9; }
       50% { opacity: 0.35; }
     }
-
     /* Панель участников */
-    .participant-link {
-  margin-left: 8px;
-}
-
-.participant-link a {
-  color: #58a6ff;
-  text-decoration: none;
-  transition: color 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.participant-link a:hover {
-  color: #8cc3ff;
-}
-
-.participant-link i {
-  font-size: 1.2em;
-  vertical-align: middle;
-}
-
     #participants-panel {
       position: fixed;
       bottom: -100%;
@@ -161,11 +137,29 @@
       z-index: 9000;
       box-shadow: 0 -12px 40px rgba(0,0,0,0.8);
       opacity: 0;
+      scrollbar-width: thin;
+      scrollbar-color: #ffd197 #0c0c0c;
     }
     #participants-panel.visible {
       bottom: 0;
       opacity: 1;
     }
+    #participants-panel::-webkit-scrollbar {
+      width: 8px;
+    }
+    #participants-panel::-webkit-scrollbar-track {
+      background: #0c0c0c;
+      border-radius: 10px;
+    }
+    #participants-panel::-webkit-scrollbar-thumb {
+      background: #ffd197;
+      border-radius: 10px;
+      border: 2px solid #0c0c0c;
+    }
+    #participants-panel::-webkit-scrollbar-thumb:hover {
+      background: #ffdfaf;
+    }
+    
     .panel-header {
       display: flex;
       justify-content: space-between;
@@ -174,7 +168,7 @@
     }
     .panel-title {
       font-size: 1.4rem;
-      color: #EDD293;
+      color: #ffd197;
       margin: 0;
     }
     .close-btn {
@@ -259,6 +253,30 @@
         display: none;
       }
     }
+    
+    #participants-panel {
+  scrollbar-width: thin;
+  scrollbar-color: #ffd197 #1e1e1e;
+}
+
+#participants-panel::-webkit-scrollbar {
+  width: 7px;
+}
+
+#participants-panel::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 10px;
+}
+
+#participants-panel::-webkit-scrollbar-thumb {
+  background: #ffd197;
+  border-radius: 10px;
+  border: 2px solid #1e1e1e;
+}
+
+#participants-panel::-webkit-scrollbar-thumb:hover {
+  background: #F7D89B;
+}
 
     @media (min-width: 769px) {
       .tooltip .hint-mobile { display: none; }
