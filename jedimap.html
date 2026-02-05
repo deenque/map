@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>География Джедаев</title>
 
   <style>
@@ -121,6 +122,28 @@
     }
 
     /* Панель участников */
+    .participant-link {
+  margin-left: 8px;
+}
+
+.participant-link a {
+  color: #58a6ff;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.participant-link a:hover {
+  color: #8cc3ff;
+}
+
+.participant-link i {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+
     #participants-panel {
       position: fixed;
       bottom: -100%;
@@ -362,7 +385,7 @@
 // НАЗВАНИЯ РЕГИОНОВ
 // ──────────────────────────────────────────────
 const regionNames = {
-  "RU-MOW": "Москва",
+  "RU-MOW": "Москва и МО",
   "RU-SPE": "Санкт-Петербург",
   "RU-NEN": "Ненецкий АО",
   "RU-YAR": "Ярославская область",
@@ -428,7 +451,7 @@ const regionNames = {
   "RU-CU": "Чувашия",
   "RU-NIZ": "Нижегородская область",
   "RU-VLA": "Владимирская область",
-  "RU-MOS": "Московская область",
+  "RU-MOS": "Москва и МО",
   "RU-KLU": "Калужская область",
   "RU-BEL": "Белгородская область",
   "RU-ZAB": "Забайкальский край",
@@ -549,8 +572,24 @@ const jediMap = {
   "RU-NIZ": [
     { city: "Бор", name: "Тестянова Надежда Александровна", link: "https://t.me/Testonadin" }
   ],
-  "RU-MOS": [
-    { city: "Дмитров", name: "Иван Щеткин", link: "https://t.me/ivan_schetkin" }
+   "RU-MOS": [
+    { city: "Москва", name: "Янкина Юлия Витальевна", link: "https://t.me/julia_yankina" },
+    { city: "Москва", name: "Сивкова Валерия Владимировна", link: "https://t.me/val_svk" },
+    { city: "Москва", name: "Ильина Арина Владимировна", link: "https://t.me/garden_arvil" },
+    { city: "Москва", name: "Пушкарёва София Александровна", link: "https://t.me/Sofia_SVM" },
+    { city: "Москва / Химки", name: "Мищенкова Марина Александровна", link: "https://t.me/Marika_kkosmo" },
+    { city: "Москва", name: "Касаточника Екатерина Сергеевна", link: "https://t.me/EKaTRinaKas" },
+    { city: "Москва / Барвиха", name: "Толмачева Саша (Матильда)", link: "https://t.me/Mvalua" },
+    { city: "Москва", name: "Казгунова Надежда Павловна", link: "https://t.me/KNadinko1924" },
+    { city: "Москва", name: "Антонюк Евгения", link: "mailto:anes13@mail.ru" },
+    { city: "Полярный", name: "Кондрашова Кристина Евгеньевна", link: "https://t.me/KrisyshkaKondrashova" },
+    { city: "Москва", name: "Назарова Инна Сергеевна", link: "https://t.me/nazarovainna" },
+    { city: "Новокузнецк", name: "Бибиков Павел", link: "https://t.me/PavelKUZNa" },
+    { city: "Москва", name: "Демина Надежда Юрьевна", link: "https://t.me/DeminaNadezhda_Yurievna" },
+    { city: "Москва", name: "Демин Анатолий Валерьевич", link: "https://t.me/Demin_Anatoly" },
+    { city: "Москва / Видное", name: "Гладких Артём Евгеньевич", link: "https://t.me/gavr1936" },
+    { city: "Москва / Щёлково", name: "Юрасов Роман Геннадиевич", link: "https://t.me/roman_yurasov" },
+    { city: "Москва, Ясенево", name: "Евдокимов Игорь Владимирович", link: "https://t.me/gariktelega" }
   ],
   "RU-BEL": [
     { city: "Старый Оскол", name: "Ганненко Алексей Иванович", link: "https://t.me/ganzzz31" }
@@ -619,10 +658,19 @@ $(document).ready(function () {
     } else {
       participants.forEach(p => {
         const city = p.city ? `<div class="participant-city">${p.city}</div>` : "";
-        const link = p.link ? 
-          `<span class="participant-link"><a href="${p.link}" target="_blank" rel="noopener">${
-            p.link.includes("t.me") ? "@" + p.link.split("/").pop() : p.link
-          }</a></span>` : "";
+       
+        const link = p.link ? (
+  p.link.includes("t.me") 
+    ? `<span class="participant-link">
+         <a href="${p.link}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px;">
+           <i class="fab fa-telegram fa-lg" style="color: #ffffff;"></i>
+           ${p.link.split("/").pop()}
+         </a>
+       </span>`
+    : `<span class="participant-link">
+         <a href="${p.link}" target="_blank" rel="noopener">${p.link}</a>
+       </span>`
+) : "";
 
         html += `
           <div class="participant">
